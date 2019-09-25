@@ -53,7 +53,7 @@ spec:
         image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
         env:
         - name: GF_AUTH_BASIC_ENABLED
-          value: "false"
+          value: "true"
         - name: GF_AUTH_ANONYMOUS_ENABLED
           value: "false"
 {{- if .Values.extraVars }}
