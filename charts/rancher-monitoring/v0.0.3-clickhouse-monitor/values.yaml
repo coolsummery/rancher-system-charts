@@ -296,7 +296,7 @@ prometheus:
           fieldPath: status.podIP
   apiGroup: "monitoring.coreos.com"
   image:
-    repository: rancher/prom-prometheus
+    repository: rancher/prom-prometheus-clickhouse
     tag: v2.7.1
     auth:
       repository: rancher/prometheus-auth
