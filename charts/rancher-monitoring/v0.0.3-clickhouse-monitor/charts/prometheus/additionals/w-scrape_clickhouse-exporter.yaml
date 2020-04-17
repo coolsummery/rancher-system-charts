@@ -1,0 +1,7 @@
+{{- if and (eq .Values.level "project") (eq .Values.sync.mode "federate") }}
+- job_name: 'clickhouse_exporter'
+  scrape_interval: 5s
+  static_configs:
+    - targets:
+        - targets: ['clickhouse-exporter:9116']
+  {{- end }}
