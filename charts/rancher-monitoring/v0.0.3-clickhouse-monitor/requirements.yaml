@@ -1,4 +1,9 @@
 dependencies:
+  - name: clickhouse-exporter
+    version: 0.0.1
+    condition: clickhouse-exporter.enabled
+    repository: "file://./charts/clickhouse-exporter/"
+
   - name: alertmanager
     version: 0.0.1
     condition: alertmanager.enabled
