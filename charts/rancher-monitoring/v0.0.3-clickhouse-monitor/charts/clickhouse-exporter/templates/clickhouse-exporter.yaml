@@ -7,15 +7,12 @@ metadata:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     name: {{ .Release.Name }}
-    cattle.io/creator: norman
-    workload.user.cattle.io/workloadselector: {{ template "app.name" . }}-{{ template "app.version" . }}
   name: {{ template "app.name" . }}
 spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
   revisionHistoryLimit: 10
   template:
-    metadata:
-      labels:
-        workload.user.cattle.io/workloadselector: {{ template "app.name" . }}-{{ template "app.version" . }}
     spec:
       containers:
         - args:
@@ -41,7 +38,8 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-  updateStrategy:
+  strategy:
     rollingUpdate:
-      maxUnavailable: 1
+      maxSurge: 1
+      maxUnavailable: 0
     type: RollingUpdate
