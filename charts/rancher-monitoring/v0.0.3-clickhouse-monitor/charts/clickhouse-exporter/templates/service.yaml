@@ -16,6 +16,7 @@ spec:
     chart: {{ template "app.version" . }}
     release: {{ .Release.Name }}
   ports:
-    - name: 9116
+    - name: "9116"
       port: 9116
       targetPort: 9116
+      protocol: TCP
