@@ -2,6 +2,5 @@
 - job_name: 'clickhouse_exporter'
   scrape_interval: 5s
   static_configs:
-    - targets:
-        - targets: ['clickhouse-exporter:9116']
+    - targets: ['clickhouse-exporter:9116']
   {{- end }}
