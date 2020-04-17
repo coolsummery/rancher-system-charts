@@ -1,7 +1,9 @@
 clickhouse-exporter:
+  enabled: true
   image:
     repository: f1yegor/clickhouse-exporter
     tag: latest
+  scrapeUri: http://localhost:8123/
 
 operator:
   nameOverride: "prometheus-operator"
