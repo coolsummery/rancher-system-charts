@@ -6,13 +6,16 @@ metadata:
     chart: {{ template "app.version" . }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
-  name: {{ .Release.Name }}
+    name: {{ .Release.Name }}
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: {{ template "app.name" . }}-{{ template "app.version" . }}
+  name: {{ template "app.name" . }}
 spec:
   revisionHistoryLimit: 10
   template:
     metadata:
       labels:
-        workload.user.cattle.io/workloadselector: clickhouse-exporter
+        workload.user.cattle.io/workloadselector: {{ template "app.name" . }}-{{ template "app.version" . }}
     spec:
       containers:
         - args:
