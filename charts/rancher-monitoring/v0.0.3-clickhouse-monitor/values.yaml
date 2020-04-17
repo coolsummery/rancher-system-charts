@@ -1,3 +1,8 @@
+clickhouse-exporter:
+  image:
+    repository: f1yegor/clickhouse-exporter
+    tag: latest
+
 operator:
   nameOverride: "prometheus-operator"
   enabledRBAC: true
@@ -273,11 +278,6 @@ grafana:
   serviceAccountName: ""
   prometheusDatasourceURL: "http://prometheus-operated:9090"
 
-clickhouse-exporter:
-  image:
-    repository: f1yegor/clickhouse-exporter
-    tag: latest
-
 prometheus:
   enabled: false
   level: cluster
@@ -290,7 +290,7 @@ prometheus:
     env:
     - name: POD_IP
       valueFrom:
-        fieldRef:d
+        fieldRef:
           fieldPath: status.podIP
   apiGroup: "monitoring.coreos.com"
   image:
