@@ -4,5 +4,5 @@ engine: gotpl
 maintainers:
 - name: coolsummery
   email: coolsummery@foxmail.com
-name: exporter-clickhouse
+name: clickhouse-exporter
 version: 0.0.1

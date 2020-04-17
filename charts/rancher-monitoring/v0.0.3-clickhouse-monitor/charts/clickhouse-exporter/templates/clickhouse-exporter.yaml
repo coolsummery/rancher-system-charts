@@ -1,19 +1,19 @@
-apiVersion: apps/v1beta2
+apiVersion: {{ template "daemonset_api_version" . }}
 kind: DaemonSet
 metadata:
   labels:
     cattle.io/creator: norman
-    workload.user.cattle.io/workloadselector: daemonSet-clickhouse-exporter-clickhouse-exporter
+    workload.user.cattle.io/workloadselector: daemonSet-clickhouse-exporter
   name: clickhouse-exporter
 spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: daemonSet-clickhouse-exporter-clickhouse-exporter
+      workload.user.cattle.io/workloadselector: daemonSet-clickhouse-exporter
   template:
     metadata:
       labels:
-        workload.user.cattle.io/workloadselector: daemonSet-clickhouse-exporter-clickhouse-exporter
+        workload.user.cattle.io/workloadselector: daemonSet-clickhouse-exporter
     spec:
       containers:
         - args:
