@@ -2,18 +2,14 @@ apiVersion: {{ template "deployment_api_version" . }}
 kind: Deployment
 metadata:
   labels:
-    cattle.io/creator: norman
-    workload.user.cattle.io/workloadselector: clickhouse-exporter
-  name: clickhouse-exporter
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.version" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ .Release.Name }}
 spec:
   revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      workload.user.cattle.io/workloadselector: clickhouse-exporter
   template:
-    metadata:
-      labels:
-        workload.user.cattle.io/workloadselector: clickhouse-exporter
     spec:
       containers:
         - args:
