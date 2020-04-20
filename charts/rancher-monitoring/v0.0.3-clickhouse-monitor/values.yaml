@@ -191,7 +191,7 @@ exporter-kube-state:
   securityContext: {}
 
 alertmanager:
-  enabled: true
+  enabled: false
   apiGroup: "monitoring.coreos.com"
   image:
     repository: rancher/prom-alertmanager
