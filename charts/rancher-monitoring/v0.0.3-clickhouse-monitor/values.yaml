@@ -3,7 +3,7 @@ clickhouse-exporter:
   image:
     repository: f1yegor/clickhouse-exporter
     tag: latest
-  scrapeUri: http://localhost:8123/
+  scrapeUri: http://access-clickhouse-cluster.clickhouse:8123/
 
 operator:
   nameOverride: "prometheus-operator"
