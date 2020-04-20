@@ -1,10 +1,3 @@
-clickhouse-exporter:
-  enabled: true
-  image:
-    repository: f1yegor/clickhouse-exporter
-    tag: latest
-  scrapeUri: http://access-clickhouse-cluster.clickhouse:8123/
-
 operator:
   nameOverride: "prometheus-operator"
   enabledRBAC: true
@@ -282,7 +275,7 @@ grafana:
 
 prometheus:
   enabled: false
-  level: cluster
+  level: &prometheus-level cluster
   auth:
     args:
     - --proxy-url=http://127.0.0.1:9090
@@ -358,6 +351,14 @@ prometheus:
     clusterDisplayName: ""
   cluster:
     alertManagerNamespace: ""
+
+clickhouse-exporter:
+  level: *prometheus-level
+  enabled: true
+  image:
+    repository: f1yegor/clickhouse-exporter
+    tag: latest
+  scrapeUri: http://access-clickhouse-cluster.clickhouse:8123/
 
 global:
   systemDefaultRegistry: ""
