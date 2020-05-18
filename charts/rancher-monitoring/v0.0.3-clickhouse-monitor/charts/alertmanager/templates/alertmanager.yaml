@@ -19,7 +19,7 @@ spec:
       release: {{ .Release.Name }}
   baseImage: {{ template "system_default_registry" . }}{{ .Values.image.repository }}
   nodeSelector:
-{{- include "linux-node-selector" . | nindent 4 }}
+    beta.kubernetes.io/os: linux
     {{- range .Values.nodeSelectors }}
     {{- $pair := regexSplit "=" . 2 }}
     {{- if eq 2 (len $pair) }}
@@ -75,8 +75,7 @@ spec:
             matchLabels:
               app: {{ template "app.name" . }}
               alertmanager: {{ .Release.Name }}
-  tolerations:
-{{- include "linux-node-tolerations" . | nindent 8 }}
 {{- if .Values.tolerations }}
+  tolerations:
 {{ toYaml .Values.tolerations | indent 4 }}
 {{- end }}
