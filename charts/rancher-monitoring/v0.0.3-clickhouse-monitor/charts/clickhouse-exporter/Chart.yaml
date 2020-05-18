@@ -1,0 +1,8 @@
+apiVersion: v1
+description: see https://github.com/f1yegor/clickhouse_exporter
+engine: gotpl
+maintainers:
+- name: coolsummery
+  email: coolsummery@foxmail.com
+name: clickhouse-exporter
+version: 0.0.1

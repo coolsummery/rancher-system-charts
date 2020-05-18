@@ -1,0 +1,50 @@
+apiVersion: {{ template "deployment_api_version" . }}
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.version" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "app.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "app.name" . }}
+      chart: {{ template "app.version" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "app.name" . }}
+        chart: {{ template "app.version" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: clickhouse-exporter
+          image: {{ template "system_default_registry" . }}{{ .Values.image.repository }}:{{ .Values.image.tag }}
+          args:
+            - -scrape_uri={{ .Values.scrapeUri }}
+          ports:
+            - containerPort: 9116
+              name: http
+          resources:
+  {{ toYaml .Values.resources | indent 12 }}
+nodeSelector:
+  beta.kubernetes.io/os: linux
+  {{- range .Values.nodeSelectors }}
+  {{- $pair := regexSplit "=" . 2 }}
+  {{- if eq 2 (len $pair) }}
+  {{ (index $pair 0) }}: {{ (index $pair 1) }}
+  {{- else }}
+  {{ (index $pair 0) }}: ""
+  {{- end }}
+  {{- end }}
+  {{- if .Values.enabledRBAC }}
+serviceAccountName: {{ default (include "app.fullname" .) .Values.serviceAccountName }}
+  {{- end }}
+  {{- if .Values.tolerations }}
+tolerations:
+  {{ toYaml .Values.tolerations | indent 8 }}
+  {{- end }}
